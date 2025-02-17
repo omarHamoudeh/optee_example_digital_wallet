@@ -176,20 +176,27 @@ static TEE_Result check_transactions(uint32_t param_types, TEE_Param params[4]) 
     size_t buffer_size = params[0].memref.size;
     size_t written = 0;
 
-    int count_to_display = (transaction_count > 3) ? 3 : transaction_count;
-    int start = (transaction_count >= 3) ? transaction_count - 3 : 0;
+    int count_to_display = (transaction_count > 3) ? 3 : transaction_count;  // Show last 3 transactions
+    int start = (transaction_count > 3) ? transaction_count - 3 : 0;  // Get starting point for last 3 transactions
 
-    IMSG("Displaying %d transactions starting from index %d", count_to_display, start);
+    IMSG("Displaying last %d transactions", count_to_display);
 
-    for (int i = 0; i < count_to_display && written < buffer_size; i++) {
-        int index = (start + i) % MAX_TRANSACTIONS;
+    written += snprintf(buffer + written, buffer_size - written, 
+        "\n============== Most Recent Transactions ==============\n");
+
+    for (int i = count_to_display - 1; i >= 0 && written < buffer_size; i--) {
+        int index = (start + i) % MAX_TRANSACTIONS;  // Correct index in circular buffer
         written += snprintf(buffer + written, buffer_size - written,
-                            "Transaction %d: %s\n", i + 1, transactions[index]);
+            "  • %s\n", transactions[index]);
     }
+
+    written += snprintf(buffer + written, buffer_size - written, 
+        "=============== Least Recent Transactions =============\n");
 
     params[0].memref.size = written;
     return TEE_SUCCESS;
 }
+
 
 
 
