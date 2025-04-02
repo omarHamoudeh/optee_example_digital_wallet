@@ -4,7 +4,7 @@ This project demonstrates a basic implementation of a digital wallet using [OP-T
 
 This project was built by modifying the official `hello_world` example from the OP-TEE documentation and using it as a foundation to develop a custom digital wallet Trusted Application.
 
-## 🔐 Overview
+## Overview
 
 In this lab-style project, I:
 
@@ -16,35 +16,28 @@ In this lab-style project, I:
 - Implemented basic secure wallet operations (deposit, withdraw) inside the TA
 - Built and tested the application using OP-TEE's secure framework
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 digital_wallet/
-├── host/                        # Host application
-│   └── main.c                   # Communicates with the Trusted Application
-├── ta/                          # Trusted Application
-│   ├── digital_wallet_ta.c      # TA source code (secure wallet logic)
-│   ├── user_ta_header_defines.h # TA UUID and command definitions
-│   └── ...
-├── Android.mk                   # Android build configuration
-├── CMakeLists.txt               # CMake configuration
-└── Makefile                     # Build instructions
+├── ...
+└── host
+ ├── main.c                    Non-secure application file
+└── ta
+ ├── Makefile                  BINARY=<uuid>
+ ├── Android.mk                Android way to invoke the Makefile
+ ├── sub.mk                    srcs-y += digital_wallet_ta.c
+ ├── include
+ │   └── digital_wallet_ta.h      Header exported to non-secure: TA commands API
+ ├── digital_wallet_ta.c          Implementation of TA entry points
+ └── user_ta_header_defines.h  TA_UUID, TA_FLAGS, TA_DATA/STACK_SIZE, ...
 ```
-
-## 🛠️ Requirements
-
-- OP-TEE development environment ([instructions](https://optee.readthedocs.io/en/latest/building/))
-- ARM toolchain
-- Familiarity with:
-  - Trusted Application UUID and header setup
-  - TA-to-host communication via `TEEC_InvokeCommand`
-  - TA build and deployment steps
 
 ## 🚀 How to Build & Run
 
 1. Follow the OP-TEE setup instructions [here](https://optee.readthedocs.io/en/latest/building/) to configure your environment.
 2. Place this project inside the `build` directory or integrate it into the OP-TEE examples tree.
-3. Make sure the `UUID` and command IDs are defined in a header shared by both host and TA.
+3. Ensure the `UUID` and command IDs are defined in a header shared by both host and TA.
 4. Build the project:
    ```bash
    make
@@ -53,13 +46,3 @@ digital_wallet/
    ```bash
    make run
    ```
-
-## 💡 Notes
-
-- You must define a unique UUID for each new Trusted Application, as described in the [OP-TEE Trusted Application Guide](https://optee.readthedocs.io/en/latest/building/trusted_applications.html#build-trusted-applications).
-- The TA is signed and packaged as part of the secure world filesystem when you run the `make` command.
-- This example showcases the secure design pattern for handling sensitive data inside a TEE using a digital wallet scenario.
-
-## 📄 License
-
-This project is open source and available under the MIT License.
