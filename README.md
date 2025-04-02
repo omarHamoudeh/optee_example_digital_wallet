@@ -33,7 +33,7 @@ digital_wallet/
  └── user_ta_header_defines.h  TA_UUID, TA_FLAGS, TA_DATA/STACK_SIZE, ...
 ```
 
-## 🚀 How to Build & Run
+## How to Build & Run
 
 1. Follow the OP-TEE setup instructions [here](https://optee.readthedocs.io/en/latest/building/) to configure your environment.
 2. Place this project inside the `build` directory or integrate it into the OP-TEE examples tree.
