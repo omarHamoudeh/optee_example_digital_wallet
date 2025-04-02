@@ -1,6 +1,8 @@
 # OP-TEE Digital Wallet Example
 
-This project demonstrates a basic implementation of a digital wallet using the [OP-TEE (Open Portable Trusted Execution Environment)](https://www.op-tee.org/) framework. It includes a Trusted Application (TA) and a host application that communicate securely to simulate digital wallet operations.
+This project demonstrates a basic implementation of a digital wallet using [OP-TEE (Open Portable Trusted Execution Environment)](https://www.op-tee.org/), which is built on **Arm TrustZone** technology. OP-TEE allows for the secure execution of trusted applications (TAs) in an isolated environment, separate from the normal operating system.
+
+In this example, a simple digital wallet is implemented with support for secure deposit and withdrawal operations using the OP-TEE framework.
 
 ## 📦 Project Structure
 
@@ -21,8 +23,8 @@ digital_wallet/
 - Securely store and manage wallet balance within the Trusted Execution Environment (TEE)
 - Support for deposit and withdrawal operations via Trusted Application
 - Communication between host and TA using OP-TEE APIs
-- Demonstrates the fundamentals of trusted computing with OP-TEE
-
+- Demonstrates secure computing with **Arm TrustZone**
+  
 ## 🛠️ Requirements
 
 - OP-TEE build environment set up (e.g., QEMU or ARM development board)
