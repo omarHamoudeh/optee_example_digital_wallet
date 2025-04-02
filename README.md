@@ -4,7 +4,7 @@ This project demonstrates a basic implementation of a digital wallet using [OP-T
 
 In this example, a simple digital wallet is implemented with support for secure deposit and withdrawal operations using the OP-TEE framework.
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 digital_wallet/
@@ -18,21 +18,15 @@ digital_wallet/
 └── Makefile                # Top-level Makefile
 ```
 
-## 🔒 Key Features
+## Key Features
 
 - Securely store and manage wallet balance within the Trusted Execution Environment (TEE)
 - Support for deposit and withdrawal operations via Trusted Application
 - Communication between host and TA using OP-TEE APIs
 - Demonstrates secure computing with **Arm TrustZone**
   
-## 🛠️ Requirements
 
-- OP-TEE build environment set up (e.g., QEMU or ARM development board)
-- [repo tool](https://gerrit.googlesource.com/git-repo/)
-- ARM toolchain for cross-compilation
-- Familiarity with building and running OP-TEE examples
-
-## 🚀 How to Build & Run
+## How to Build & Run
 
 1. Set up the OP-TEE development environment as per [official OP-TEE instructions](https://optee.readthedocs.io/en/latest/building/).
 2. Clone this repository into the `build` directory of OP-TEE.
