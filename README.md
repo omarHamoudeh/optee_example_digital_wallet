@@ -4,7 +4,7 @@ This project demonstrates a basic implementation of a digital wallet using the [
 
 ## 📦 Project Structure
 
-\```
+```
 digital_wallet/
 ├── host/                   # Host application source code
 │   └── main.c              # Main logic for interacting with the Trusted App
@@ -14,7 +14,7 @@ digital_wallet/
 ├── Android.mk              # Android build configuration
 ├── CMakeLists.txt          # CMake build config
 └── Makefile                # Top-level Makefile
-\```
+```
 
 ## 🔒 Key Features
 
