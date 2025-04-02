@@ -36,13 +36,13 @@ digital_wallet/
 2. Clone this repository into the `build` directory of OP-TEE.
 3. Include this example in your `Makefile` or `manifest.xml` for OP-TEE.
 4. Build the project:
-   \```bash
+   ```bash
    make
-   \```
+   ```
 5. Run on QEMU or your target board:
-   \```bash
+   ```bash
    make run
-   \```
+   ```
 
 ## 📄 License
 
