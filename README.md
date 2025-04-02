@@ -1,44 +1,64 @@
 # OP-TEE Digital Wallet Example
 
-This project demonstrates a basic implementation of a digital wallet using [OP-TEE (Open Portable Trusted Execution Environment)](https://www.op-tee.org/), which is built on **Arm TrustZone** technology. OP-TEE allows for the secure execution of trusted applications (TAs) in an isolated environment, separate from the normal operating system.
+This project demonstrates a basic implementation of a digital wallet using [OP-TEE (Open Portable Trusted Execution Environment)](https://www.op-tee.org/), which is built on **Arm TrustZone** technology. OP-TEE enables the creation of Trusted Applications (TAs) that run in a secure world, isolated from the normal operating system.
 
-In this example, a simple digital wallet is implemented with support for secure deposit and withdrawal operations using the OP-TEE framework.
+This project was built by modifying the official `hello_world` example from the OP-TEE documentation and using it as a foundation to develop a custom digital wallet Trusted Application.
 
-## Project Structure
+## 🔐 Overview
+
+In this lab-style project, we:
+
+- Set up the OP-TEE development environment (QEMU-based or hardware-based)
+- Created and defined a new Trusted Application (TA) by:
+  - Generating a unique UUID
+  - Creating a corresponding UUID header file
+  - Defining a command interface between the host and the TA
+- Implemented basic secure wallet operations (deposit, withdraw) inside the TA
+- Built and tested the application using OP-TEE's secure framework
+
+## 📦 Project Structure
 
 ```
 digital_wallet/
-├── host/                   # Host application source code
-│   └── main.c              # Main logic for interacting with the Trusted App
-├── ta/                     # Trusted Application source code
-│   ├── digital_wallet_ta.c # Trusted Application logic
-│   └── ...                 # Makefiles and build scripts for TA
-├── Android.mk              # Android build configuration
-├── CMakeLists.txt          # CMake build config
-└── Makefile                # Top-level Makefile
+├── host/                        # Host application
+│   └── main.c                   # Communicates with the Trusted Application
+├── ta/                          # Trusted Application
+│   ├── digital_wallet_ta.c      # TA source code (secure wallet logic)
+│   ├── user_ta_header_defines.h # TA UUID and command definitions
+│   └── ...
+├── Android.mk                   # Android build configuration
+├── CMakeLists.txt               # CMake configuration
+└── Makefile                     # Build instructions
 ```
 
-## Key Features
+## 🛠️ Requirements
 
-- Securely store and manage wallet balance within the Trusted Execution Environment (TEE)
-- Support for deposit and withdrawal operations via Trusted Application
-- Communication between host and TA using OP-TEE APIs
-- Demonstrates secure computing with **Arm TrustZone**
-  
+- OP-TEE development environment ([instructions](https://optee.readthedocs.io/en/latest/building/))
+- ARM toolchain
+- Familiarity with:
+  - Trusted Application UUID and header setup
+  - TA-to-host communication via `TEEC_InvokeCommand`
+  - TA build and deployment steps
 
-## How to Build & Run
+## 🚀 How to Build & Run
 
-1. Set up the OP-TEE development environment as per [official OP-TEE instructions](https://optee.readthedocs.io/en/latest/building/).
-2. Clone this repository into the `build` directory of OP-TEE.
-3. Include this example in your `Makefile` or `manifest.xml` for OP-TEE.
+1. Follow the OP-TEE setup instructions [here](https://optee.readthedocs.io/en/latest/building/) to configure your environment.
+2. Place this project inside the `build` directory or integrate it into the OP-TEE examples tree.
+3. Make sure the `UUID` and command IDs are defined in a header shared by both host and TA.
 4. Build the project:
    ```bash
    make
    ```
-5. Run on QEMU or your target board:
+5. Run in QEMU or on a supported board:
    ```bash
    make run
    ```
+
+## 💡 Notes
+
+- You must define a unique UUID for each new Trusted Application, as described in the [OP-TEE Trusted Application Guide](https://optee.readthedocs.io/en/latest/building/trusted_applications.html#build-trusted-applications).
+- The TA is signed and packaged as part of the secure world filesystem when you run the `make` command.
+- This example showcases the secure design pattern for handling sensitive data inside a TEE using a digital wallet scenario.
 
 ## 📄 License
 
